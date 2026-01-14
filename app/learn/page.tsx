@@ -1,5 +1,6 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   Container,
@@ -13,12 +14,14 @@ import {
   Text,
   Box,
   Badge,
+  Spinner,
+  Flex,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { INDONESIAN, LEARNING_TYPES, LEARNING_LEVELS } from '@/constants';
 import { getCharactersByLevel } from '@/data/characters';
 
-export default function LearnPage() {
+function LearnPageContent() {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
 
@@ -157,5 +160,21 @@ export default function LearnPage() {
         </SimpleGrid>
       </VStack>
     </Container>
+  );
+}
+
+export default function LearnPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <LearnPageContent />
+    </Suspense>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <Flex minH="100vh" align="center" justify="center">
+      <Spinner size="xl" color="green.500" />
+    </Flex>
   );
 }

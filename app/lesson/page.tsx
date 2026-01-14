@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Box,
@@ -36,7 +36,7 @@ interface QuizQuestion {
   }[];
 }
 
-export default function LessonPage() {
+function LessonPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const toast = useToast();
@@ -459,5 +459,21 @@ export default function LessonPage() {
         </Box>
       )}
     </Container>
+  );
+}
+
+function LessonLoadingFallback() {
+  return (
+    <Flex minH="100vh" align="center" justify="center">
+      <Spinner size="xl" color="green.500" />
+    </Flex>
+  );
+}
+
+export default function LessonPage() {
+  return (
+    <Suspense fallback={<LessonLoadingFallback />}>
+      <LessonPageContent />
+    </Suspense>
   );
 }
