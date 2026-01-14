@@ -315,15 +315,18 @@ export default function LessonPage() {
       {/* Question Card */}
       <Box
         bg="white"
-        _dark={{ bg: 'gray.800', borderColor: 'gray.700' }}
         p={{ base: 4, sm: 5, md: 8 }}
         borderRadius={{ base: 'lg', md: 'xl' }}
         boxShadow={{ base: '0 4px 6px rgba(0,0,0,0.07)', md: '0 10px 30px rgba(0,0,0,0.1)' }}
-        _dark={{ boxShadow: { base: '0 4px 6px rgba(0,0,0,0.2)', md: '0 10px 30px rgba(0,0,0,0.3)' } }}
         mb={{ base: 5, md: 8 }}
         textAlign="center"
         border="1px solid"
         borderColor="gray.200"
+        _dark={{
+          bg: 'gray.800',
+          borderColor: 'gray.700',
+          boxShadow: { base: '0 4px 6px rgba(0,0,0,0.2)', md: '0 10px 30px rgba(0,0,0,0.3)' }
+        }}
       >
         <Text fontSize={{ base: 'xs', sm: 'sm', md: 'md' }} color="gray.500" _dark={{ color: 'gray.400' }} mb={{ base: 3, md: 4 }}>
           {INDONESIAN.quiz.selectCharacter}
@@ -375,19 +378,21 @@ export default function LessonPage() {
               onClick={() => handleAnswer(option.id)}
               disabled={showResult}
               bg={bgColor}
-              _dark={{ bg: darkBg }}
               borderWidth={{ base: 1.5, md: 2 }}
               borderColor={borderColor}
-              _dark={{ borderColor: darkBorder }}
               p={{ base: 3, sm: 4, md: 6 }}
               height="auto"
               minH={{ base: '12', sm: '14', md: '16' }}
               cursor={showResult ? 'default' : 'pointer'}
               transition="all 0.3s"
               _hover={!showResult ? { borderColor: 'blue.500', _dark: { borderColor: 'blue.400' }, transform: 'translateY(-2px)' } : {}}
-              color={textColor}
-              _dark={{ color: darkText }}
               borderRadius={{ base: 'md', md: 'lg' }}
+              _dark={{
+                bg: darkBg,
+                borderColor: darkBorder,
+                color: darkText
+              }}
+              color={textColor}
             >
               <VStack spacing={{ base: 1, md: 2 }}>
                 <Text fontSize={{ base: 'md', sm: 'lg', md: 'xl' }} fontWeight="bold" wordBreak="break-word">
@@ -438,13 +443,15 @@ export default function LessonPage() {
       {level !== 'mudah' && showHint && hint && (
         <Box
           bg="yellow.50"
-          _dark={{ bg: 'yellow.900' }}
           border="1px solid"
           borderColor="yellow.200"
-          _dark={{ borderColor: 'yellow.700' }}
           p={{ base: 3, sm: 4, md: 4 }}
           borderRadius={{ base: 'md', md: 'lg' }}
           mb={{ base: 4, md: 6 }}
+          _dark={{
+            bg: 'yellow.900',
+            borderColor: 'yellow.700'
+          }}
         >
           <Text fontSize={{ base: 'xs', sm: 'sm', md: 'sm' }} color="yellow.800" _dark={{ color: 'yellow.200' }} lineHeight="1.6">
             <strong>Petunjuk:</strong> {hint}
